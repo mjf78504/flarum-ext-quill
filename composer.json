@@ -1,5 +1,5 @@
 {
-    "name": "ozzzzam/flarum-ext-quillWithImage",
+    "name": "ozzzzam/flarum-ext-quill-with-image",
     "keywords": ["flarum","wysiwyg","quill"],
     "description": "Quill WYSIWYG editor for Flarum",
     "type": "flarum-extension",
