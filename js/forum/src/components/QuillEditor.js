@@ -55,7 +55,7 @@ export default class QuillEditor extends Component {
             theme: 'snow'
         });
         
-        
+         const editor = this.quill;
         
       /**
        * Step1. select local image
@@ -85,16 +85,25 @@ export default class QuillEditor extends Component {
      * @param {File} file
      */
     function saveToServer(file: File) {
+        console.log('save file')
       const fd = new FormData();
-      fd.append('image', file);
+      fd.append('files[]', file);
 
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', 'http://localhost:3000/upload/image', true);
-      xhr.onload = () => {
-        if (xhr.status === 200) {
+      xhr.open('POST', 'https://localhost/api/flagrow/upload', true);
+//      xhr.setRequestHeader("X-CSRF-Token", "GWvymvzczow2g99eaWKIluJG6viXIp3hEp7GWzdZ");
+
+        xhr.onload = () => {
+        if (xhr.status === 201) {
           // this is callback data: url
-          const url = JSON.parse(xhr.responseText).data;
-          insertToEditor(url);
+          console.log(xhr.responseText)
+          const url = JSON.parse(xhr.responseText);
+          
+          let xxkk = url[0].replace('[upl-image-preview url=','').replace(']','');
+          
+          
+          
+          insertToEditor(xxkk);
         }
       };
       xhr.send(fd);
@@ -105,14 +114,16 @@ export default class QuillEditor extends Component {
      *
      * @param {string} url
      */
-    function insertToEditor(url: string) {
+    function insertToEditor(url: any[]) {
       // push image url to rich editor.
+      
+      console.log(url);
       const range = editor.getSelection();
-      editor.insertEmbed(range.index, 'image', 'http://localhost:9000${url}');
+      editor.insertEmbed(range.index, 'image', url);
     }
 
     // quill editor add image handler
-     this.quill.getModule('toolbar').addHandler('image', () => {
+    editor.getModule('toolbar').addHandler('image', () => {
       selectLocalImage();
     });
 
