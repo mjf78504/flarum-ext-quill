@@ -10,7 +10,8 @@ app.initializers.add('sledov-quill', () => {
             placeholder: this.props.placeholder,
             onchange: this.content,
             onsubmit: this.onsubmit.bind(this),
-            value: this.content()
+            value: this.content(),
+            apiUrl: app.forum.attribute('apiUrl')
         });
     });
 });
