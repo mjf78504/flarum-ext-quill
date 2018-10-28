@@ -90,7 +90,7 @@ export default class QuillEditor extends Component {
       fd.append('files[]', file);
 
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', 'https://localhost/api/flagrow/upload', true);
+      xhr.open('POST', this.apiUrl+ '/flagrow/upload', true);
 //      xhr.setRequestHeader("X-CSRF-Token", "GWvymvzczow2g99eaWKIluJG6viXIp3hEp7GWzdZ");
 
         xhr.onload = () => {

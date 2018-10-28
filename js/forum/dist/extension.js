@@ -11269,38 +11269,29 @@ module.exports = __webpack_require__(62);
 /***/ })
 /******/ ]);
 });;
-System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'flarum/components/Button', 'flarum/utils/ItemList', 'flarum/helpers/listItems'], function (_export) {
+'use strict';
 
-    /**
-     * The `QuillEditor` component displays a WYSIWYG textarea
-     *
-     * ### Props
-     *
-     * - `submitLabel`
-     * - `value`
-     * - `placeholder`
-     * - `disabled`
-     */
-    'use strict';
+System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'flarum/components/Button', 'flarum/utils/ItemList', 'flarum/helpers/listItems'], function (_export, _context) {
+    "use strict";
 
     var Component, Button, ItemList, listItems, QuillEditor;
     return {
         setters: [function (_flarumComponent) {
-            Component = _flarumComponent['default'];
+            Component = _flarumComponent.default;
         }, function (_flarumComponentsButton) {
-            Button = _flarumComponentsButton['default'];
+            Button = _flarumComponentsButton.default;
         }, function (_flarumUtilsItemList) {
-            ItemList = _flarumUtilsItemList['default'];
+            ItemList = _flarumUtilsItemList.default;
         }, function (_flarumHelpersListItems) {
-            listItems = _flarumHelpersListItems['default'];
+            listItems = _flarumHelpersListItems.default;
         }],
         execute: function () {
-            QuillEditor = (function (_Component) {
+            QuillEditor = function (_Component) {
                 babelHelpers.inherits(QuillEditor, _Component);
 
                 function QuillEditor() {
                     babelHelpers.classCallCheck(this, QuillEditor);
-                    babelHelpers.get(Object.getPrototypeOf(QuillEditor.prototype), 'constructor', this).apply(this, arguments);
+                    return babelHelpers.possibleConstructorReturn(this, (QuillEditor.__proto__ || Object.getPrototypeOf(QuillEditor)).apply(this, arguments));
                 }
 
                 babelHelpers.createClass(QuillEditor, [{
@@ -11379,7 +11370,7 @@ System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'fla
                             fd.append('files[]', file);
 
                             var xhr = new XMLHttpRequest();
-                            xhr.open('POST', 'https://localhost/anylocations/public/community/srilanka/api/flagrow/upload', true);
+                            xhr.open('POST', this.apiUrl + '/flagrow/upload', true);
                             //      xhr.setRequestHeader("X-CSRF-Token", "GWvymvzczow2g99eaWKIluJG6viXIp3hEp7GWzdZ");
 
                             xhr.onload = function () {
@@ -11417,12 +11408,6 @@ System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'fla
                         this.quill.clipboard.dangerouslyPasteHTML(0, this.value());
                         this.quill.on('text-change', this.oninput.bind(this));
                     }
-
-                    /**
-                     * Build an item list for the text editor controls.
-                     *
-                     * @return {ItemList}
-                     */
                 }, {
                     key: 'controlItems',
                     value: function controlItems() {
@@ -11446,10 +11431,6 @@ System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'fla
 
                         return items;
                     }
-
-                    /**
-                     * Handle input into the editor.
-                     */
                 }, {
                     key: 'oninput',
                     value: function oninput() {
@@ -11458,10 +11439,6 @@ System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'fla
                         this.props.onchange(html);
                         m.redraw.strategy('none');
                     }
-
-                    /**
-                     * Handle the submit button being clicked.
-                     */
                 }, {
                     key: 'onsubmit',
                     value: function onsubmit() {
@@ -11469,40 +11446,9 @@ System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'fla
                     }
                 }]);
                 return QuillEditor;
-            })(Component);
+            }(Component);
 
             _export('default', QuillEditor);
-        }
-    };
-});;
-System.register('sledov/quill/main', ['flarum/extend', 'flarum/app', 'flarum/components/ComposerBody', 'sledov/quill/components/QuillEditor'], function (_export) {
-    'use strict';
-
-    var extend, app, ComposerBody, QuillEditor;
-    return {
-        setters: [function (_flarumExtend) {
-            extend = _flarumExtend.extend;
-        }, function (_flarumApp) {
-            app = _flarumApp['default'];
-        }, function (_flarumComponentsComposerBody) {
-            ComposerBody = _flarumComponentsComposerBody['default'];
-        }, function (_sledovQuillComponentsQuillEditor) {
-            QuillEditor = _sledovQuillComponentsQuillEditor['default'];
-        }],
-        execute: function () {
-
-            app.initializers.add('sledov-quill', function () {
-                extend(ComposerBody.prototype, 'init', function init() {
-                    this.editor = new QuillEditor({
-                        submitLabel: this.props.submitLabel,
-                        placeholder: this.props.placeholder,
-                        onchange: this.content,
-                        onsubmit: this.onsubmit.bind(this),
-                        value: this.content(),
-                        apiUrl: app.forum.attribute('apiUrl')
-                    });
-                });
-            });
         }
     };
 });
