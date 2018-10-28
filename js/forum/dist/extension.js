@@ -11271,10 +11271,10 @@ module.exports = __webpack_require__(62);
 });;
 'use strict';
 
-System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'flarum/components/Button', 'flarum/utils/ItemList', 'flarum/helpers/listItems'], function (_export, _context) {
+System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'flarum/components/Button', 'flarum/utils/ItemList', 'flarum/helpers/listItems', 'flarum/app'], function (_export, _context) {
     "use strict";
 
-    var Component, Button, ItemList, listItems, QuillEditor;
+    var Component, Button, ItemList, listItems, app, QuillEditor;
     return {
         setters: [function (_flarumComponent) {
             Component = _flarumComponent.default;
@@ -11284,6 +11284,8 @@ System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'fla
             ItemList = _flarumUtilsItemList.default;
         }, function (_flarumHelpersListItems) {
             listItems = _flarumHelpersListItems.default;
+        }, function (_flarumApp) {
+            app = _flarumApp.default;
         }],
         execute: function () {
             QuillEditor = function (_Component) {
@@ -11370,7 +11372,7 @@ System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'fla
                             fd.append('files[]', file);
 
                             var xhr = new XMLHttpRequest();
-                            xhr.open('POST', this.apiUrl + '/flagrow/upload', true);
+                            xhr.open('POST', app.forum.attribute('apiUrl') + '/flagrow/upload', true);
                             //      xhr.setRequestHeader("X-CSRF-Token", "GWvymvzczow2g99eaWKIluJG6viXIp3hEp7GWzdZ");
 
                             xhr.onload = function () {

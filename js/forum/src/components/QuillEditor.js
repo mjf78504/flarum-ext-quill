@@ -2,6 +2,7 @@ import Component from 'flarum/Component';
 import Button from 'flarum/components/Button';
 import ItemList from 'flarum/utils/ItemList';
 import listItems from 'flarum/helpers/listItems';
+import app from 'flarum/app';
 
 /**
  * The `QuillEditor` component displays a WYSIWYG textarea
@@ -90,7 +91,7 @@ export default class QuillEditor extends Component {
       fd.append('files[]', file);
 
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', this.apiUrl+ '/flagrow/upload', true);
+      xhr.open('POST', app.forum.attribute('apiUrl') + '/flagrow/upload', true);
 //      xhr.setRequestHeader("X-CSRF-Token", "GWvymvzczow2g99eaWKIluJG6viXIp3hEp7GWzdZ");
 
         xhr.onload = () => {
