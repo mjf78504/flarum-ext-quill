@@ -11451,4 +11451,37 @@ System.register('sledov/quill/components/QuillEditor', ['flarum/Component', 'fla
             _export('default', QuillEditor);
         }
     };
+});;
+'use strict';
+
+System.register('sledov/quill/main', ['flarum/extend', 'flarum/app', 'flarum/components/ComposerBody', 'sledov/quill/components/QuillEditor'], function (_export, _context) {
+    "use strict";
+
+    var extend, app, ComposerBody, QuillEditor;
+    return {
+        setters: [function (_flarumExtend) {
+            extend = _flarumExtend.extend;
+        }, function (_flarumApp) {
+            app = _flarumApp.default;
+        }, function (_flarumComponentsComposerBody) {
+            ComposerBody = _flarumComponentsComposerBody.default;
+        }, function (_sledovQuillComponentsQuillEditor) {
+            QuillEditor = _sledovQuillComponentsQuillEditor.default;
+        }],
+        execute: function () {
+
+            app.initializers.add('sledov-quill', function () {
+                extend(ComposerBody.prototype, 'init', function init() {
+                    this.editor = new QuillEditor({
+                        submitLabel: this.props.submitLabel,
+                        placeholder: this.props.placeholder,
+                        onchange: this.content,
+                        onsubmit: this.onsubmit.bind(this),
+                        value: this.content(),
+                        apiUrl: app.forum.attribute('apiUrl')
+                    });
+                });
+            });
+        }
+    };
 });
