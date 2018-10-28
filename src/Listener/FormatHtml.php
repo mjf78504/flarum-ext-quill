@@ -37,7 +37,9 @@ class FormatHtml
             'h3',
             'ul',
             'ol',
-            'li'
+            'li',
+            'h1',
+            'img'
         );
 
         foreach ($htmlElements as $el) {
@@ -46,5 +48,7 @@ class FormatHtml
 
         $configurator->HTMLElements->allowAttribute('a', 'href');
         $configurator->HTMLElements->allowAttribute('a', 'title');
+        
+        $configurator->HTMLElements->allowAttribute('img', 'src');
     }
 }
