@@ -2,7 +2,7 @@
 
 namespace Sledov\Quill\Listener;
 
-use Flarum\Event\ConfigureFormatter;
+use Flarum\Formatter\Event\Configuring;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class FormatHtml
@@ -12,13 +12,13 @@ class FormatHtml
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(ConfigureFormatter::class, [$this, 'addHtmlFormatter']);
+        $events->listen(Configuring::class, [$this, 'addHtmlFormatter']);
     }
 
     /**
-     * @param ConfigureFormatter $event
+     * @param Configuring $event
      */
-    public function addHtmlFormatter(ConfigureFormatter $event)
+    public function addHtmlFormatter(Configuring $event)
     {
         $configurator = $event->configurator;
 
