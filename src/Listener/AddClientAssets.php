@@ -3,16 +3,16 @@
 namespace Sledov\Quill\Listener;
 
 use Illuminate\Contracts\Events\Dispatcher;
-use Flarum\Event\ConfigureWebApp;
+use Flarum\Frontend\Event\Rendering;
 
 class AddClientAssets
 {
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(ConfigureWebApp::class, [$this, 'addAssets']);
+        $events->listen(Rendering::class, [$this, 'addAssets']);
     }
 
-    public function addAssets(ConfigureWebApp $event)
+    public function addAssets(Rendering $event)
     {
         if ($event->isForum()) {
             $event->addAssets([
